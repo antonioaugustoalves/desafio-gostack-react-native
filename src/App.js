@@ -19,14 +19,13 @@ export default function App() {
   useEffect(() =>{
     api.get('repositories').then(response =>{
       setRepositories(response.data);
-      //console.log(repositories);
     });
   }, []);
   async function handleLikeRepository(id) {
     const response = await api.post(`repositories/${id}/like`);
     const likedRepository = response.data;
     //console.log(likedRepository);
-    const repositoriesUpdated = repositories.mapa(repository =>{
+    const repositoriesUpdated = repositories.map(repository =>{
       if(repository.id === id){
         return likedRepository;
       }else{
@@ -52,9 +51,8 @@ export default function App() {
 
           <View style={styles.likesContainer}>
             <Text
-              style={styles.likeText}
-              // Remember to replace "1" below with repository ID: 
-              testID={`repository-likes-${repository.id}`}
+            style={styles.likeText}
+            testID={`repository-likes-${repository.id}`}
             >
               {repository.likes} curtidas
             </Text>
