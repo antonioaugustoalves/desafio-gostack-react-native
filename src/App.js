@@ -18,9 +18,10 @@ export default function App() {
 
   useEffect(() =>{
     api.get('repositories').then(response =>{
-      setRepositories(response.data);
+      setRepositories(response.data)
     });
   }, []);
+
   async function handleLikeRepository(id) {
     const response = await api.post(`repositories/${id}/like`);
     const likedRepository = response.data;
@@ -54,7 +55,8 @@ export default function App() {
             style={styles.likeText}
             testID={`repository-likes-${repository.id}`}
             >
-              {repository.likes} curtidas
+              {repository.likes ===1 ? `${repository.likes} curtida`
+              :`${repository.likes} curtidas`}
             </Text>
           </View>
 
@@ -114,6 +116,9 @@ const styles = StyleSheet.create({
   },
   button: {
     marginTop: 10,
+    textAlign:'center',
+    
+
   },
   buttonText: {
     fontSize: 14,
@@ -122,5 +127,10 @@ const styles = StyleSheet.create({
     color: "#fff",
     backgroundColor: "#7159c1",
     padding: 15,
+    borderRadius:50,
+    justifyContent:'center',
+    alignItems:'center',
+    textAlign:'center',
+
   },
 });
